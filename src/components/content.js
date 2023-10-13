@@ -7,4 +7,4 @@ function Content(){
 
     );
 }
-export default Content;
+export default Content; //export content
