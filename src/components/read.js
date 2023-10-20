@@ -1,47 +1,28 @@
+import { useEffect, useState } from "react";
+import axios from "axios"; //npm install axios
 import Books from "./books";
 
 function Read(){
+    const[data, setData] = useState([]);
 
-    const data = [
+    useEffect(
+        ()=>{
+            //servers goes and gets the url and sends back a response
+            axios.get('https://jsonblob.com/api/jsonblob/1161593332966481920')
+            .then(
+                (response)=>{
+                    setData(response.data.books)  //response.data will give back body of code and .books will pull out the array( what we want)
+                }
+            )
+            .catch(
+                (error)=>{
+                    console.log(error);
+                }
+            )
+
+        }, []
+    );
         
-{
-    "title": "Learn Git in a Month of Lunches",
-    "isbn": "1617292419",
-    "pageCount": 0,
-    "thumbnailUrl":
-    "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/umali.jpg",
-    "status": "MEAP",
-    "authors": ["Rick Umali"],
-    "categories": []
-    },
-    {
-    "title": "MongoDB in Action, Second Edition",
-    "isbn": "1617291609",
-    "pageCount": 0,
-    "thumbnailUrl":
-    "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/banker2.jpg",
-    "status": "MEAP",
-    "authors": [
-    "Kyle Banker",
-    "Peter Bakkum",
-    "Tim Hawkins",
-    "Shaun Verch",
-    "Douglas Garrett"
-    ],
-    "categories": []
-    },
-    {
-    "title": "Getting MEAN with Mongo, Express, Angular, and Node",
-    "isbn": "1617292036",
-    "pageCount": 0,
-    "thumbnailUrl":
-     "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/sholmes.jpg",
-    "status": "MEAP",
-    "authors": ["Simon Holmes"],
-    "categories": []
-    }
-    ];
-    
 
     return(
         <div>
@@ -49,7 +30,6 @@ function Read(){
             <Books myBooks={data}></Books> 
         </div>
     );
-
 }
 
 export default Read; //export read
